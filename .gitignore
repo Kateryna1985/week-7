@@ -4,4 +4,4 @@ lib/firebase/config.js
 node_modules/
 
 .env*.local
-.env
+# .env
