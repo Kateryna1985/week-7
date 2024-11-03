@@ -84,7 +84,6 @@ export default function RestaurantListings({
 
   useEffect(() => {
     const unsubscribe = getRestaurantsSnapshot(data => {
-      console.log(data, "data");
       setRestaurants(data);
     }, filters);
 
