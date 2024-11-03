@@ -2,7 +2,7 @@
 
 // This components handles the review dialog and uses a next.js feature known as Server Actions to handle the form submission
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import RatingPicker from "@/src/components/RatingPicker.jsx";
 import { handleReviewFormSubmission } from "@/src/app/actions.js";
 
@@ -15,6 +15,11 @@ const ReviewDialog = ({
   id,
 }) => {
   const dialog = useRef();
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    onChange(rating, "rating");
+  }, [rating]);
 
   // dialogs only render their backdrop when called with `showModal`
   useLayoutEffect(() => {
@@ -47,7 +52,10 @@ const ReviewDialog = ({
           <h3>Add your review</h3>
         </header>
         <article>
-          <RatingPicker />
+          <RatingPicker
+            rating={rating}
+            onChange={setRating}
+          />
 
           <p>
             <input
@@ -70,6 +78,11 @@ const ReviewDialog = ({
             type="hidden"
             name="userId"
             value={userId}
+          />
+          <input
+            type="hidden"
+            name="rating"
+            value={rating}
           />
         </article>
         <footer>
